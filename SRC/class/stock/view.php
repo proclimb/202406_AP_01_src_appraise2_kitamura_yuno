@@ -2,9 +2,13 @@
 //
 //仕入管理画面
 //
+
+// ユーザー定義関数
 function subStockView($param)
 {
 ?>
+	<!-- html -->
+	<!-- jsカレンダー -->
 	<script>
 		var cal1 = new JKL.Calendar("cal1", "form", "sInsDTFrom");
 		var cal2 = new JKL.Calendar("cal2", "form", "sInsDTTo");
@@ -37,10 +41,19 @@ function subStockView($param)
 					<td><input type="text" name="sInsDTFrom" value="<?php print $param["sInsDTFrom"] ?>" size="15" /> <a href="javascript:cal1.write();" onChange="cal1.getFormValue(); cal1.hide();"><img src="./images/b_calendar.png"></a><span id="cal1"></span>～
 						<input type="text" name="sInsDTTo" value="<?php print $param["sInsDTTo"] ?>" size="15" /> <a href="javascript:cal2.write();" onChange="cal2.getFormValue(); cal2.hide();"><img src="./images/b_calendar.png"></a><span id="cal2"></span>
 					</td>
+
+					<!-- チェックボックス -->
 					<th>距離</th>
 					<td>
 						<?php
-						for ($i = 0; $i < 27; $i++) {
+
+						// 繰り返しfor(式1;2;3)
+						//0から繰り返す初期化の；繰り返す条件（回数）；forブロック内の処理が1回終わる毎に必ず実行
+						//「i」は繰り返し文でよく使われる変数,「＋＋」はインクリメント演算子,「変数「i」に値を１追加する」
+
+
+						// for ($i = 0; $i < 27; $i++) {
+						for ($i = 0; $i < 4; $i++) {
 						?>
 							<input type="checkbox" name="sDistance[]" value="<?php print $i + 1; ?>" <?php for ($j = 0; $j < 4; $j++) {
 																											if ($param["sDistance"][$j] == $i + 1) print ' checked="checked"';
@@ -127,7 +140,7 @@ function subStockView($param)
 
 		$sPage = fnPage($count, $param["sPage"], 'stockSearch');
 		?>
-
+		<!-- 　　　　　昇順降順 -->
 		<div class="list">
 			<table border="0" cellpadding="5" cellspacing="1">
 				<tr>
@@ -353,3 +366,5 @@ function subStockEditView($param)
 <?php
 }
 ?>
+
+<!-- テスト -->
