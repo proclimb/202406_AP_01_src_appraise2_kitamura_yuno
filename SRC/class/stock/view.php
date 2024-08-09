@@ -348,6 +348,7 @@ function subStockEditView($param)
 		<?php
 		}
 		?>
+		<br>
 
 	</form>
 <?php
