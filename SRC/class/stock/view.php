@@ -118,8 +118,8 @@ function subStockView($param)
 		if ($_REQUEST['act'] == 'stock') {
 			return;
 		}
-
-		$sql = fnSqlStockList(1, $param);
+		// No18
+		$sql = fnSqlStockList(0, $param);
 		$res = mysqli_query($param["conn"], $sql);
 		$row = mysqli_fetch_array($res);
 
@@ -148,8 +148,9 @@ function subStockView($param)
 					<th class="list_head">備考<?php fnOrder('NOTE', 'stockSearch') ?></th>
 				</tr>
 				<?php
-				$sql  = fnSqlStockList(1, $param);
-				var_dump($sql);
+
+				$sql = fnSqlStockList(1, $param);
+				// var_dump($sql);
 				$res  = mysqli_query($param["conn"], $sql);
 				$i = 0;
 				while ($row = mysqli_fetch_array($res)) {
@@ -394,3 +395,4 @@ function subStockEditView($param)
 <?php
 }
 ?>
+//
