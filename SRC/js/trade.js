@@ -40,7 +40,7 @@ function fnTradeEditCheck() {
 
 	// 文字数エラー
 	tmp = form.prefecture.value;
-	// if (tmp.length >= 10) {
+
 	if (tmp.length > 10) {
 		alert('住所（都道府県）は10文字以内で入力してください');
 		return;
