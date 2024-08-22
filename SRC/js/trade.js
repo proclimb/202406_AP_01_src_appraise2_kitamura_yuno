@@ -3,7 +3,9 @@
 //
 function fnTradeEditCheck() {
 	tmp = form.name.value;
-	if (tmp.length < 0) {
+
+
+	if (tmp.length == 0) {
 		alert('業者名を入力してください');
 		return;
 	}
@@ -12,7 +14,7 @@ function fnTradeEditCheck() {
 		return;
 	}
 
-	tmp = form.nameYomi.value;
+	tmp = form.nameFuri.value;
 	if (tmp.length > 100) {
 		alert('業者名（よみ）は100文字以内で入力してください');
 		return;
@@ -36,8 +38,10 @@ function fnTradeEditCheck() {
 		return;
 	}
 
+	// 文字数エラー
 	tmp = form.prefecture.value;
-	if (tmp.length >= 10) {
+	// if (tmp.length >= 10) {
+	if (tmp.length > 10) {
 		alert('住所（都道府県）は10文字以内で入力してください');
 		return;
 	}
@@ -73,7 +77,7 @@ function fnTradeEditCheck() {
 	}
 
 	if (confirm('この内容で登録します。よろしいですか？')) {
-		form.act.value = 'tradeEditCompleta';
+		form.act.value = 'tradeEditComplete';
 		form.submit();
 	}
 }
@@ -83,6 +87,9 @@ function fnTradeEditCheck() {
 function fnTradeDeleteCheck(no) {
 	if (confirm('削除します。よろしいですか？')) {
 		form.tradeNo.value = no;
+		// 追加
+		form.act.value = "tradeDelete";
+		//
 		form.submit();
 	}
 }
