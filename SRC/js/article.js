@@ -3,14 +3,17 @@
 //
 function fnArticleEditCheck() {
 	tmp = form.article.value;
-	if (tmp) {
+	// No1
+	if (tmp.length == 0) {
 		alert('物件名を入力してください');
 		return;
 	}
 	if (isLength(100, "物件名", form.article)) { return; }
-
-	form.act.value = 'articleEditComplete';
-	form.submit();
+	// No3
+	if (confirm('この内容で登録します。よろしいですか？')) {
+		form.act.value = 'articleEditComplete';
+		form.submit();
+	}
 }
 
 
