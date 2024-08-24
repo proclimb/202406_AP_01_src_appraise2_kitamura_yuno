@@ -8,40 +8,42 @@ function fnSqlArticleList($flg, $sDel, $sArticle, $sRoom, $sKeyPlace, $sArticleN
 		case 0:
 			$sql  = "SELECT COUNT(*)";
 			break;
+			// No7
 		case 1:
-			$sql  = "SELECT ARTICLENO, ARTICLE, RO0M, KEYPLACE, ARTICLENOTE, KEYBOX, DRAWING, SELLCHARGE";
+			$sql  = "SELECT ARTICLENO, ARTICLE, ROOM, KEYPLACE, ARTICLENOTE, KEYBOX, DRAWING, SELLCHARGE";
 			break;
 	}
 	$sql .= " FROM TBLARTICLE";
 	$sql .= " WHERE DEL = $sDel";
+	// No19
 	if ($sArticle) {
-		$sql .= " OR ARTICLE LIKE '%$sArticle$%'";
+		$sql .= " AND ARTICLE LIKE '%$sArticle$%'";
 	}
 	if ($sRoom) {
-		$sql .= " OR ROOM LIKE '%$sRoom%'";
+		$sql .= " AND ROOM LIKE '%$sRoom%'";
 	}
 	if ($sKeyPlace) {
-		$sql .= " OR KEYPLACE LIKE '%$sKeyPlace%'";
+		$sql .= " AND KEYPLACE LIKE '%$sKeyPlace%'";
 	}
 	if ($sArticleNote) {
-		$sql .= " OR ARTICLENOTE LIKE '%$sArticleNote%'";
+		$sql .= " AND ARTICLENOTE LIKE '%$sArticleNote%'";
 	}
 	if ($sKeyBox) {
-		$sql .= " OR KEYBOX LIKE '%l$sKeyBox%'";
+		$sql .= " AND KEYBOX LIKE '%l$sKeyBox%'";
 	}
 	if ($sDrawing) {
-		$sql .= " OR DRAWING LIKE '%$sDrawing%'";
+		$sql .= " AND DRAWING LIKE '%$sDrawing%'";
 	}
 	if ($sSellCharge) {
-		$sql .= " OR SELLCHARGE LIKE '%$sSellCharge%'";
+		$sql .= " AND SELLCHARGE LIKE '%$sSellCharge%'";
 	}
 	if ($orderBy) {
 		$sql .= " ORDER BY $orderBy $orderTo";
 	}
+	// No7
 	if ($flg) {
-		$sql .= " LIMIT " . (($sPage + 1) * PAGE_MAX) . ", " . PAGE_MAX;
+		$sql .= " LIMIT " . (($sPage - 1) * PAGE_MAX) . ", " . PAGE_MAX;
 	}
-
 	return ($sql);
 }
 
@@ -54,8 +56,7 @@ function fnSqlArticleEdit($articleNo)
 {
 	$sql  = "SELECT ARTICLE, ROOM, KEYPLACE, ADDRESS, ARTICLENOTE, KEYBOX, DRAWING, SELLCHARGE, DEL";
 	$sql .= " FROM TBLARTICLE";
-	$sql .= " WHERE ARTICLENO = 1";
-
+	$sql .= " WHERE ARTICLENO = $articleNo";
 	return ($sql);
 }
 
@@ -70,11 +71,12 @@ function fnSqlArticleUpdate($articleNo, $article, $room, $keyPlace, $address, $a
 	$sql .= " SET ARTICLE = '$article'";
 	$sql .= ",ROOM = '$room'";
 	$sql .= ",KEYPLACE = '$keyPlace'";
-	$sql .= ",ADDRESS = '$address";
+	$sql .= ",ADDRESS = '$address'";
 	$sql .= ",ARTICLENOTE = '$articleNote'";
 	$sql .= ",KEYBOX = '$keyBox'";
 	$sql .= ",DRAWING = '$drawing'";
 	$sql .= ",SELLCHARGE = '$sellCharge'";
+	$sql .= ",UPDT = CURRENT_TIMESTAMP";
 	$sql .= ",DEL = '$del'";
 	$sql .= " WHERE ARTICLENO = $articleNo";
 
@@ -102,8 +104,6 @@ function fnSqlArticleInsert($articleNo, $article, $room, $keyPlace, $address, $a
 
 	return ($sql);
 }
-
-
 //
 //物件管理情報削除
 //
